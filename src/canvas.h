@@ -1,7 +1,8 @@
 /*-----------------------------------------------
- * Author:
- * Date:
- * Description:
+ * Author: Yue Chen
+ * Date: 2.13.2023
+ * Description: The class have a set of methods that can draw 
+ * lines and triangles
  ----------------------------------------------*/
 
 #ifndef canvas_H_
@@ -13,6 +14,11 @@
 
 namespace agl
 {
+   struct Vertice {
+      int x;
+      int y;
+   };
+
    enum PrimitiveType {UNDEFINED, LINES, TRIANGLES};
    class Canvas
    {
@@ -36,6 +42,13 @@ namespace agl
       void begin(PrimitiveType type);
       void end();
 
+      // Get the width of the canvas
+      int getW();
+      // Get the height of the canvas
+      int getH();
+      // Set the pixel RGB color at index (x, y) 
+      void set(int x, int y, Pixel pixel);
+
       // Specifiy a vertex at raster position (x,y)
       // x corresponds to the column; y to the row
       void vertex(int x, int y);
@@ -46,8 +59,23 @@ namespace agl
       // Fill the canvas with the given background color
       void background(unsigned char r, unsigned char g, unsigned char b);
 
+      // Draw a line from vertice 1 to vertice 2
+      void drawLine(Vertice v1, Vertice v2);
+
+      void drawLineLow(Vertice v1, Vertice v2, Pixel color1, Pixel color2);
+
+      void drawLineHigh(Vertice v1, Vertice v2, Pixel color1, Pixel color2);
+
+      // Draw a triangle according to three vertices
+      void drawTriangle(Vertice v1, Vertice v2, Vertice v3);
+
+
    private:
+      std::vector<Vertice> _positions;
+      PrimitiveType _type;
+      Pixel _color;
       Image _canvas;
+      std::vector<Pixel> _colors;
    };
 }
 

@@ -1,10 +1,10 @@
+// Copyright 2021, Aline Normoyle, alinen
 /*-----------------------------------------------
- * Author:
- * Date:
- * Description:
+ * Author: Yue Chen
+ * Date: 2.8.2023
+ * Description: This is the file that stores the fields 
+* and the strucutres of Image class
  ----------------------------------------------*/
-
-
 #ifndef AGL_IMAGE_H_
 #define AGL_IMAGE_H_
 
@@ -64,7 +64,7 @@ class Image {
    *
    * Data will have size width * height * 4 (RGB)
    */
-  char* data() const;
+  unsigned char* data() const;
 
   /**
    * @brief Replace image RGB data
@@ -135,13 +135,13 @@ class Image {
 
   // Apply the following calculation to the pixels in 
   // our image and the given image:
-  //    result.pixel = this.pixel + other.pixel
+  //    result.pixel = this.pixel + other.pixel * alpha
   // Assumes that the two images are the same size
   Image add(const Image& other) const;
 
   // Apply the following calculation to the pixels in 
   // our image and the given image:
-  //    result.pixel = this.pixel - other.pixel
+  //    result.pixel = this.pixel - other.pixel * alpha
   // Assumes that the two images are the same size
   Image subtract(const Image& other) const;
 
@@ -193,8 +193,13 @@ class Image {
   // Fill this image with a color
   void fill(const Pixel& c);
 
+  void free();
+
  private:
-   // todo
+   int _width;
+   int _height;
+   int _channel;
+   Pixel* _data;
 };
 }  // namespace agl
 #endif  // AGL_IMAGE_H_
