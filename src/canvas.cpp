@@ -136,7 +136,7 @@ void Canvas::drawLineLow(Vertice v1, Vertice v2, Pixel color1, Pixel color2){
       H = -H;
    }
    int F = 2*H-W;
-   for(int x = v1.x; x <= v2.x; x++){
+   for(int x = v1.x; x < v2.x; x++){
       //calculate the color
       unsigned char r = color1.r * (1-t/W)+ color2.r * (t/W);
       unsigned char g = color1.g * (1-t/W)+ color2.g * (t/W);  
@@ -168,7 +168,7 @@ void Canvas::drawLineHigh(Vertice v1, Vertice v2, Pixel color1, Pixel color2){
       W = -W;
    }
    int F = 2*W-H;
-   for(int y = v1.y; y <= v2.y; y++){
+   for(int y = v1.y; y < v2.y; y++){
       //calculate the color
       unsigned char r = color1.r * (1-t/H)+ color2.r * (t/H);
       unsigned char g = color1.g * (1-t/H)+ color2.g * (t/H);  
@@ -234,8 +234,8 @@ void Canvas::drawTriangle(Vertice a, Vertice b, Vertice c){
    int fc_1 = (a.y-b.y)*-1 - (a.x-b.x)*-1 - b.x*a.y + a.x*b.y;
 
 
-   for(int y = ymin; y <= ymax; y++){
-      for(int x = xmin; x <= xmax; x++){
+   for(int y = ymin; y < ymax; y++){
+      for(int x = xmin; x < xmax; x++){
          float aa = ((b.y-c.y)*x - (b.x-c.x)*y - c.x*b.y + c.y*b.x)/(float)fa;
          float bb = ((c.y-a.y)*x - (c.x-a.x)*y - a.x*c.y + c.x*a.y)/(float)fb;
          float cc = ((a.y-b.y)*x - (a.x-b.x)*y - b.x*a.y + a.x*b.y)/(float)fc;
