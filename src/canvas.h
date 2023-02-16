@@ -19,7 +19,7 @@ namespace agl
       int y;
    };
 
-   enum PrimitiveType {UNDEFINED, LINES, TRIANGLES};
+   enum PrimitiveType {UNDEFINED, LINES, TRIANGLES, CIRCLES};
    class Canvas
    {
    public:
@@ -53,6 +53,10 @@ namespace agl
       // x corresponds to the column; y to the row
       void vertex(int x, int y);
 
+      //Specific a center vertex at raster position (x,y) and a radius
+      // x corresponds to the column; y to the row; r to the radius
+      void circle(int x, int y, int r);
+
       // Specify a color. Color components are in range [0,255]
       void color(unsigned char r, unsigned char g, unsigned char b);
 
@@ -69,13 +73,17 @@ namespace agl
       // Draw a triangle according to three vertices
       void drawTriangle(Vertice v1, Vertice v2, Vertice v3);
 
+      //Draw a circe according to its radius and its center position
+      void drawCircle(Vertice v, int r);
+
 
    private:
       std::vector<Vertice> _positions;
+      std::vector<int> _radius;
+      std::vector<Pixel> _colors;
       PrimitiveType _type;
       Pixel _color;
       Image _canvas;
-      std::vector<Pixel> _colors;
    };
 }
 

@@ -45,6 +45,13 @@ void Canvas::end()
          _positions.pop_back();
          drawTriangle(v1,v2,v3);
       }
+   }else if(_type == CIRCLES){
+      while(!_positions.empty()){
+         Vertice v = _positions.back();
+         _positions.pop_back();
+         int r = _radius.back();
+         _radius.pop_back();
+      }
    }
    _type = UNDEFINED;
 }
@@ -67,6 +74,12 @@ void Canvas::vertex(int x, int y)
    if(_positions.size()!=_colors.size()){
       _colors.push_back(_color);
    }
+}
+
+void Canvas::circle(int x, int y, int r)
+{
+   vertex(x,y);
+   _radius.push_back(r);
 }
 
 void Canvas::color(unsigned char r, unsigned char g, unsigned char b)
@@ -229,9 +242,9 @@ void Canvas::drawTriangle(Vertice a, Vertice b, Vertice c){
    int fa = (b.y-c.y)*a.x - (b.x-c.x)*a.y - c.x*b.y + c.y*b.x;
    int fb = (c.y-a.y)*b.x - (c.x-a.x)*b.y - a.x*c.y + c.x*a.y;
    int fc = (a.y-b.y)*c.x - (a.x-b.x)*c.y - b.x*a.y + a.x*b.y;
-   int fa_1 = (b.y-c.y)*-1 - (b.x-c.x)*-1 - c.x*b.y + c.y*b.x;
-   int fb_1 = (c.y-a.y)*-1 - (c.x-a.x)*-1 - a.x*c.y + c.x*a.y;
-   int fc_1 = (a.y-b.y)*-1 - (a.x-b.x)*-1 - b.x*a.y + a.x*b.y;
+   float fa_1 = (b.y-c.y)*-1 - (b.x-c.x)*-1.5 - c.x*b.y + c.y*b.x;
+   float fb_1 = (c.y-a.y)*-1 - (c.x-a.x)*-1.5 - a.x*c.y + c.x*a.y;
+   float fc_1 = (a.y-b.y)*-1 - (a.x-b.x)*-1.5 - b.x*a.y + a.x*b.y;
 
 
    for(int y = ymin; y < ymax; y++){
@@ -241,7 +254,7 @@ void Canvas::drawTriangle(Vertice a, Vertice b, Vertice c){
          float cc = ((a.y-b.y)*x - (a.x-b.x)*y - b.x*a.y + a.x*b.y)/(float)fc;
          if(aa >= 0 && bb >= 0 && cc >= 0){
             //avoiding overlaps
-            if((aa>0||fa_1*fa > 0)&&(bb>=0||fb_1*fb >= 0)&&(cc>=0||fc_1*fc >=0)){
+            if((aa>0||fa_1*fa > 0)&&(bb>0||fb_1*fb > 0)&&(cc>0||fc_1*fc >0)){
                //calculate the color
                unsigned char r = aa*color1.r + bb*color2.r + cc*color3.r;
                unsigned char g = aa*color1.g + bb*color2.g + cc*color3.g;
@@ -253,4 +266,13 @@ void Canvas::drawTriangle(Vertice a, Vertice b, Vertice c){
       }
    }
 }
+
+/*void Canvas::drawCircle(Vertice v, int r){
+   int xmin = v.x-r;
+   int xmax = v.x+r;
+   int ymin = v.y-r;
+   int ymax = v.y+r;
+}*/
+
+
 
