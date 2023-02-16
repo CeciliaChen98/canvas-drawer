@@ -14,7 +14,7 @@
 
 namespace agl
 {
-   struct Vertice {
+   struct Vertex {
       int x;
       int y;
    };
@@ -63,22 +63,22 @@ namespace agl
       // Fill the canvas with the given background color
       void background(unsigned char r, unsigned char g, unsigned char b);
 
-      // Draw a line from vertice 1 to vertice 2
-      void drawLine(Vertice v1, Vertice v2);
+      // Draw a line from vertex 1 to vertex 2
+      void drawLine(Vertex v1, Vertex v2);
 
-      void drawLineLow(Vertice v1, Vertice v2, Pixel color1, Pixel color2);
+      void drawLineLow(Vertex v1, Vertex v2, Pixel color1, Pixel color2);
 
-      void drawLineHigh(Vertice v1, Vertice v2, Pixel color1, Pixel color2);
+      void drawLineHigh(Vertex v1, Vertex v2, Pixel color1, Pixel color2);
 
       // Draw a triangle according to three vertices
-      void drawTriangle(Vertice v1, Vertice v2, Vertice v3);
+      void drawTriangle(Vertex v1, Vertex v2, Vertex v3);
 
       //Draw a circe according to its radius and its center position
-      void drawCircle(Vertice v, int r);
+      void drawCircle(Vertex v, int r);
 
 
    private:
-      std::vector<Vertice> _positions;
+      std::vector<Vertex> _positions;
       std::vector<int> _radius;
       std::vector<Pixel> _colors;
       PrimitiveType _type;

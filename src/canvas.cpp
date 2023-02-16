@@ -29,25 +29,25 @@ void Canvas::end()
 {
    if(_type == LINES ){
       while(!_positions.empty()){
-         Vertice v2 = _positions.back();
+         Vertex v2 = _positions.back();
          _positions.pop_back();
-         Vertice v1 = _positions.back();
+         Vertex v1 = _positions.back();
          _positions.pop_back();
          drawLine(v1,v2);
       }
    }else if(_type == TRIANGLES){
       while(!_positions.empty()){
-         Vertice v3 = _positions.back();
+         Vertex v3 = _positions.back();
          _positions.pop_back();
-         Vertice v2 = _positions.back();
+         Vertex v2 = _positions.back();
          _positions.pop_back();
-         Vertice v1 = _positions.back();
+         Vertex v1 = _positions.back();
          _positions.pop_back();
          drawTriangle(v1,v2,v3);
       }
    }else if(_type == CIRCLES){
       while(!_positions.empty()){
-         Vertice v = _positions.back();
+         Vertex v = _positions.back();
          _positions.pop_back();
          int r = _radius.back();
          _radius.pop_back();
@@ -100,7 +100,7 @@ void Canvas::background(unsigned char r, unsigned char g, unsigned char b)
 }
 
 //implementing Bresenham Algorithm
-void Canvas::drawLine(Vertice v1, Vertice v2){
+void Canvas::drawLine(Vertex v1, Vertex v2){
    //access the colors 
    Pixel color2 = _colors.back();
    _colors.pop_back();
@@ -111,7 +111,7 @@ void Canvas::drawLine(Vertice v1, Vertice v2){
    int H = v2.y-v1.y;
    if(std::abs(H)<std::abs(W)){
       if(v1.x>v2.x){
-         Vertice temp = v1;
+         Vertex temp = v1;
          v1 = v2;
          v2 = temp;
 
@@ -122,7 +122,7 @@ void Canvas::drawLine(Vertice v1, Vertice v2){
       drawLineLow(v1,v2,color1,color2);
    }else{
       if(v1.y>v2.y){
-         Vertice temp = v1;
+         Vertex temp = v1;
          v1 = v2;
          v2 = temp;
 
@@ -135,7 +135,7 @@ void Canvas::drawLine(Vertice v1, Vertice v2){
 }
 
 //to draw a line whose |slope| < 1
-void Canvas::drawLineLow(Vertice v1, Vertice v2, Pixel color1, Pixel color2){
+void Canvas::drawLineLow(Vertex v1, Vertex v2, Pixel color1, Pixel color2){
    
    float t = 0;//help to decide the color
    Pixel color;
@@ -167,7 +167,7 @@ void Canvas::drawLineLow(Vertice v1, Vertice v2, Pixel color1, Pixel color2){
 }
 
 //to draw a line whose |slope| >= 1
-void Canvas::drawLineHigh(Vertice v1, Vertice v2, Pixel color1, Pixel color2){
+void Canvas::drawLineHigh(Vertex v1, Vertex v2, Pixel color1, Pixel color2){
 
    float t = 0;//help to decide the color
    Pixel color;
@@ -198,7 +198,7 @@ void Canvas::drawLineHigh(Vertice v1, Vertice v2, Pixel color1, Pixel color2){
    }
 }
 
-void Canvas::drawTriangle(Vertice a, Vertice b, Vertice c){
+void Canvas::drawTriangle(Vertex a, Vertex b, Vertex c){
    //access the colors
    Pixel color3 = _colors.back();
    _colors.pop_back();
@@ -219,7 +219,7 @@ void Canvas::drawTriangle(Vertice a, Vertice b, Vertice c){
    float acy = c.y - a.y;
    //swap b and c if the cross product of am and ac is less than 0
    if((amx*acy-amy*acx)<0){
-      Vertice temp = c;
+      Vertex temp = c;
       c = b;
       b = temp;
 
