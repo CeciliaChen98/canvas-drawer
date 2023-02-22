@@ -19,7 +19,7 @@ namespace agl
       int y;
    };
 
-   enum PrimitiveType {UNDEFINED, LINES, TRIANGLES, CIRCLES};
+   enum PrimitiveType {UNDEFINED, LINES, TRIANGLES, CIRCLES, POINTS, RECTANGLES, STARS, FLOWERS};
    class Canvas
    {
    public:
@@ -53,9 +53,12 @@ namespace agl
       // x corresponds to the column; y to the row
       void vertex(int x, int y);
 
-      //Specific a center vertex at raster position (x,y) and a radius
-      // x corresponds to the column; y to the row; r to the radius
-      void circle(int x, int y, int r);
+      //Specify a radius
+      // r corresponds to the radius
+      void radius(int r);
+
+      //Specify the number of petals
+      void setPetal(int p);
 
       // Specify a color. Color components are in range [0,255]
       void color(unsigned char r, unsigned char g, unsigned char b);
@@ -76,12 +79,26 @@ namespace agl
       //Draw a circe according to its radius and its center position
       void drawCircle(Vertex v, int r);
 
+      //Draw a rectangle according to two vertices
+      void drawRectangle(Vertex v1, Vertex v2);
+
+      // Draw a triangle according to three vertices
+      void drawPureTriangle(Vertex v1, Vertex v2, Vertex v3, Pixel);
+
+      //Draw a star according to its center position and its radius
+      void drawStar(Vertex v, int radius);
+
+      //Draw a flower according to its center position, radius, and its number of petals
+      void drawFlower(Vertex v, int num_petals, int radius);
+
 
    private:
       std::vector<Vertex> _positions;
       std::vector<int> _radius;
+      std::vector<int> _petals;
       std::vector<Pixel> _colors;
       PrimitiveType _type;
+      int _petal;
       Pixel _color;
       Image _canvas;
    };

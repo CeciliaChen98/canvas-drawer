@@ -1,8 +1,7 @@
 # canvas-drawer
 
 Implements a simple drawing api
-
-TODO: Add a representative image for your project here
+![avatar](/images/my_art_work1.png)
 
 ## How to build
 
@@ -44,9 +43,48 @@ canvas-drawer/build $ ../bin/draw_art
 ```
 
 ## Supported primitives
+```
+1. Points
+```
+Usage: need one vertex to be specified 
+![avatar](/images/points.png)
+```
+2. Lines
+```
+Usage: need two vertices to be specified
+![avatar](/images/lines.png)
+```
+3. Triangles
+```
+Usage: need three vertices to be specified
+![avatar](/images/triangles.png)
+```
+4. Circles
+```
+Usage: need the center vertex and the radius to be specified
+![avatar](/images/circles.png)
 
-TODO: Document the custom primitives supported by your canvas class
+```
+5. Rectangles
+```
+Usage: need two vertices to be specified
+![avatar](/images/rectangles.png)
+
+```
+6. Stars
+```
+Usage: need the center vertex and the radius to be specified
+![avatar](/images/stars.png)
+```
+7. Roses
+```
+Usage: need the center vertex, the radius, and the number of petals to be specified
+![avatar](/images/flowers1.png)
 
 ## Results
 
-TODO: Show artworks using your class
+![avatar](/images/my_art_work1.png)
+
+![avatar](/images/bacteria.png)
+
+![avatar](/images/my_art_work2.png)
